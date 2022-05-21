@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+    <head id="head">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <link rel="icon" type="favicon_created_by_logaster.ico" href="/">
+   </head>
+<style>
+.home {
+	box-shadow: 0px 1px 0px 0px #3dc21b;
+	background:linear-gradient(to bottom, #317542 5%, #47bd07 100%);
+	background-color:#317542;
+	border-radius:15px;
+	border:2px solid #1b7023;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:10px 14px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #000000;
+}
+.home:hover {
+	background:linear-gradient(to bottom, #47bd07 5%, #317542 100%);
+	background-color:#47bd07;
+}
+.home:active {
+	position:relative;
+	top:1px;
+}
+#navbar{
+    background-color: #333029;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid blue;
+}
+#menu__toggle {
+  opacity: 0;
+}
+
+#menu__toggle:checked ~ .menu__btn > span {
+  transform: rotate(45deg);
+}
+#menu__toggle:checked ~ .menu__btn > span::before {
+  top: 0;
+  transform: rotate(0);
+}
+#menu__toggle:checked ~ .menu__btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+#menu__toggle:checked ~ .menu__box {
+  visibility: visible;
+  left: 0;
+}
+
+.menu__btn {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #616161;
+  transition-duration: .25s;
+}
+
+.menu__btn > span::before {
+  content: '';
+  top: -8px;
+}
+.menu__btn > span::after {
+  content: '';
+  top: 8px;
+}
+
+.menu__box {
+  display: block;
+  position: fixed;
+  visibility: hidden;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  height: 100%;
+  margin: 0;
+  padding: 80px 0;
+  list-style: none;
+  background-color: #ECEFF1;
+  box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
+  transition-duration: .25s;
+}
+
+.menu__item {
+  display: block;
+  padding: 12px 24px;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition-duration: .25s;
+}
+.menu__item:hover {
+  background-color: #CFD8DC;
+}
+.day-night-label {
+  display: grid;
+  gap: 1rem;
+  place-items: center;
+}
+
+.day-night-circle {
+  position: relative;
+  background: #2a3741;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 0px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.day-night-circle:hover {
+  background: #e9786b;
+}
+.sun {
+  margin-top: 20px;
+  background: #f2ef88;
+  box-shadow: 0 0 20px rgba(242, 239, 136, 0.4);
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  position: relative;
+  top: 70%;
+  left: 20%;
+  transition: all 0.5s ease;
+}
+
+.day-night-circle:hover .sun {
+  left: 35%;
+  top: 48%;
+  transition: all 0.5s 0s ease;
+}
+.moon {
+  position: absolute;
+  margin-top: 20px;
+  background: #d9d8d0;
+  box-shadow: inset -10px 2px 0 0px #899098;
+  width: 22.5%;
+  height: 22.5%;
+  border-radius: 100%;
+  position: relative;
+  margin-left: -50px;
+  left: 65%;
+  top: -10%;
+  overflow: hidden;
+  transition: all 0.5s 0s ease;
+}
+.day-night-circle:hover .moon {
+  left: 120%;
+  top: -50%;
+}
+.moon div:nth-child(n) {
+  position: relative;
+  background: #b9b8b0;
+  border-radius: 50%;
+  box-shadow: inset 4px -2px 0 0px #535457;
+}
+.moon div:nth-child(1) {
+  top: 25%;
+  left: 12%;
+  width: 27%;
+  height: 27%;
+}
+.moon div:nth-child(2) {
+  top: -11%;
+  left: 60%;
+  width: 16%;
+  height: 16%;
+}
+.moon div:nth-child(3) {
+  top: 25%;
+  left: 44%;
+  width: 16%;
+  height: 16%;
+}
+.stars {
+  opacity: 1;
+  margin-left: 100px;
+  top: 0;
+  left: 0;
+  transition: all 0.4s ease;
+  z-index: 1000;
+}
+.day-night-circle:hover .stars {
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+.stars div:nth-child(n) {
+  position: absolute;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+  overflow: hidden;
+  width: 0.4%;
+  height: 0.4%;
+  margin-left: 20%;
+  margin-top: -20%;
+  transition: all 0.5s ease;
+}
+.night .stars div:nth-child(n) {
+  margin-left: 0;
+  margin-top: 0;
+  transition: all 1s 0.4s ease-out;
+}
+.stars div:nth-child(1) {
+  left: 25%;
+  top: 30%;
+}
+.stars div:nth-child(2) {
+  left: 55%;
+  top: 20%;
+}
+.stars div:nth-child(3) {
+  left: 60%;
+  top: 60%;
+}
+.stars div:nth-child(4) {
+  left: 40%;
+  top: 45%;
+}
+.stars div:nth-child(5) {
+  left: 15%;
+  top: 55%;
+}
+.stars div:nth-child(6) {
+  left: 40%;
+  top: 10%;
+}
+.stars div:nth-child(7) {
+  left: 80%;
+  top: 55%;
+}
+.water {
+  position: absolute;
+  background: #7fa1bb;
+  width: 100%;
+  height: 200px;
+  top: 68%;
+  transition: all 0.5s ease;
+}
+.day-night-circle:hover .water {
+  background: #71baf2;
+}
+</style>
+
+    <body>
+    <div id="navbar" class="row">
+        <div class="col-1">
+            <div class="hamburger-menu">
+                <input id="menu__toggle" type="checkbox" />
+                <label class="menu__btn" for="menu__toggle">
+                  <span></span>
+                </label>
+            
+                <ul class="menu__box">
+                  <li><a class="menu__item" href="#"><div class="day-night-circle">
+                    <div class="sun"></div>
+                    <div class="moon">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                    <div class="stars">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                    <div class="water"></div>
+                  </div></a></li>
+                        <li><a class="menu__item" href="#">Аутстаффинг</a></li>
+                        <li><a class="menu__item" href="#">Блог</a></li>
+                        <li><a class="menu__item" href="#">Контакты</a></li>
+                </ul>
+              </div>
+        </div>
+        <div class="col-2" style = "padding: 0px;">
+            <img id="logo" src="horizontal_on_white_by_logaster-removebg-preview.png" style="width:70%;">
+        </div>
+
+        <div class="col-3">
+        </div>
+       
+        <div id="ToHome" class="col-1">
+            <a href="/" class="home">דף הבית</a>
+        </div>
+
+        <div class="col-1">
+            <a href="/contact" class="home">צור קשר</a>
+        </div>
+        <div class="col-1">
+            <a href="/Animals" class="home">חיות</a>
+        </div>
+    </div>
+    </body>
+    <script>
+
+    </script>
+
+</html>
